@@ -14,5 +14,11 @@ define(['app'], function (app) {
                 controller: 'home',
                 css: ['view/home/home.css']
             })
+            .state("head",{
+                url: "/head",
+                templateUrl: 'view/head.html',
+                controller: 'home',
+                css: []
+            })
     }
 })

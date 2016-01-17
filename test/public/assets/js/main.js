@@ -7,7 +7,10 @@ require.config({
             exports: 'angular',
             deps: ['jquery']
         },
-        'angular-ui-router': ['angular'],
+        'angular-ui-router':{
+            exports:'angular-ui-router',
+            deps:['angular']
+        },
         'angular-css':['angular']
     },
     paths:{
