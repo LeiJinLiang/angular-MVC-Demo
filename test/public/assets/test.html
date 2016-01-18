@@ -26,7 +26,11 @@
         <div class="well" ui-view="viewB"></div>
     </div>
 </div>
-
+<form>
+    <input type="button" value="Start count!" onClick="timedCount()">
+    <input type="text" id="txt">
+    <input type="button" value="Stop count!" onClick="stopCount()">
+</form>
 <!-- Angular -->
 <script src="js/lib/angular/angular.min.js"></script>
 <!-- UI-Router -->
@@ -72,7 +76,63 @@
                 })
     })
 </script>
+<script type="text/javascript">
+    function getCookie(c_name)
+    {
+        if (document.cookie.length>0)
+        {
+            c_start=document.cookie.indexOf(c_name + "=")
+            if (c_start!=-1)
+            {
+                c_start=c_start + c_name.length+1
+                c_end=document.cookie.indexOf(";",c_start)
+                if (c_end==-1) c_end=document.cookie.length
+                return unescape(document.cookie.substring(c_start,c_end))
+            }
+        }
+        return ""
+    }
 
+    function setCookie(c_name,value,expiredays)
+    {
+        var exdate=new Date()
+        exdate.setDate(exdate.getDate()+expiredays)
+        document.cookie=c_name+ "=" +escape(value)+
+                ((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
+    }
+
+    function checkCookie()
+    {
+        username1=getCookie('username1')
+        if (username1!=null && username1!="")
+        {alert('Welcome again '+username1+'!')}
+        else
+        {
+            username1=prompt('Please enter your name:',"")
+            if (username1!=null && username1!="")
+            {
+                setCookie('username1',username1,365)
+            }
+        }
+    }
+    checkCookie();
+</script>
+<script>
+    var c=0
+    var t
+
+    function timedCount()
+    {
+        document.getElementById('txt').value=c;
+        c=c+1;
+        t=setTimeout("timedCount()",1000)
+    }
+
+    function stopCount()
+    {
+        clearTimeout(t)
+    }
+</script>
 </body>
 
 </html>
