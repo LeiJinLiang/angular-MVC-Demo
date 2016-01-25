@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header id="hd"></header>
+<script>
+    (function(document){
+        var div=document.createElement('div');
+        var viewport;
+        var obj = {
+            init:function(id){
+                viewport = document.querySelector("#"+id);
+            },
+            addChild:function(child){
+                viewport.appendChild(child);
+            },
+            addAttribute:function(viewport){
+                viewport.className="nav";
+                viewport.style.color = "white";
+                viewport.innerHTML="button";
+                viewport.style.width='100px';
+                viewport.style.height='30px';
+                viewport.style.backgroundColor='grey';
+                viewport.style.textAlign='center';
+                viewport.style.lineHeight='30px';
+                viewport.style.margin='0 auto';
+                viewport.style.borderRadius='5px';
+            },
+            removeChild:function(child){
+                viewport.removeChild(child);
+            },
+            addClick: function (viewport) {
+                viewport.parentNode.addEventListener('click', function () {
+                    alert('事件冒泡');
+                },false);//事件冒泡
+                viewport.parentNode.addEventListener('click', function () {
+                    alert("事件捕获");
+                },true);//事件捕获
+                //证明了捕获事件先执行
+            },
+            addBubble: function (viewport) {
+                viewport.addEventListener('click', function () {
+                    alert('冒泡1');
+                },false);
+                viewport.addEventListener('click', function () {
+                    alert('冒泡2');
+                },false);
+                viewport.addEventListener('click', function () {
+                    alert('冒泡3....');
+                },false);
+                //注册多个冒泡事件，先注册限执行。。
+            }
+
+        };
+        obj.init('hd');
+        obj.addChild(div);
+        obj.addAttribute(div);
+//        obj.addClick(div);
+        obj.addBubble(div);
+        window.jView = obj;
+    })(document);
+</script>
+</body>
+</html>
